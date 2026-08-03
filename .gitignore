@@ -1,0 +1,25 @@
+# Dependencies
+site/node_modules/
+
+# Build output
+output/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.*
+
+# Astro
+site/.astro/
+
+# Old site (reference only, not needed in repo)
+old/

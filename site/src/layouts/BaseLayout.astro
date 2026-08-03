@@ -1,0 +1,347 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Trevor Price School of Motoring - Professional driving instructor in North Herefordshire with over thirty years experience and a high pass rate.' } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/lessons', label: 'Lessons' },
+  { href: '/coverage', label: 'Coverage' },
+  { href: '/prices', label: 'Prices' },
+  { href: '/testimonials', label: 'Testimonials' },
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <ul class="header__list">
+                <li class="header__list-item">
+                    <h1 class="header__heading header__heading--name">Trevor Price</h1>
+                </li>
+                <li class="header__list-item">
+                    <h2 class="header__heading header__heading--company">School of Motoring</h2>
+                </li>
+            </ul>
+            <ul class="header__list">
+                <li class="header__list-item header__list-item--number">
+                    <i class="header__icon fas fa-phone" aria-hidden="true"></i>
+                    <h3 class="header__heading header__heading--landline">01568 770 582</h3>
+                </li>
+                <li class="header__list-item header__list-item--number">
+                    <i class="header__icon fas fa-mobile" aria-hidden="true"></i>
+                    <h3 class="header__heading header__heading--mobile">07980 094 289</h3>
+                </li>
+            </ul>
+        </header>
+
+        <nav class="navigation" aria-label="Main navigation">
+            <ul class="navigation__list" id="nav-list">
+                <li class="navigation__list-item navigation__list-item--hamburger" id="hamburger">
+                    Menu <i class="fas fa-bars navigation__hamburger-icon"></i>
+                </li>
+                {navLinks.map(link => (
+                    <li class="navigation__list-item">
+                        <a class="navigation__link" href={link.href}>{link.label}</a>
+                    </li>
+                ))}
+            </ul>
+        </nav>
+
+        <div class="image"></div>
+
+        <section class="main">
+            <slot />
+        </section>
+
+        <footer class="footer">
+            Trevor Price School of Motoring &copy; {new Date().getFullYear()}
+        </footer>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navList = document.getElementById('nav-list');
+        if (hamburger && navList) {
+            hamburger.addEventListener('click', () => {
+                navList.classList.toggle('navigation__list--open');
+            });
+        }
+    </script>
+</body>
+</html>
+
+<style is:global>
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #0f76ba;
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #212529;
+    }
+
+    .container {
+        height: 100%;
+        min-height: 100vh;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #fff;
+    }
+
+    @media (min-width: 576px) {
+        .container {
+            max-width: 1022px;
+        }
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+    /* Header */
+    .header {
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        background-color: #fff;
+        justify-content: space-between;
+    }
+
+    .header__list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .header__list-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .header__list-item--number {
+        justify-content: flex-end;
+    }
+
+    .header__icon {
+        padding: 0;
+        color: tomato;
+        margin: 0 10px 0 0;
+    }
+
+    .header__heading {
+        margin: 0;
+        padding: 0;
+        font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+        color: #f85741;
+        font-style: normal;
+        text-rendering: optimizeLegibility;
+        font-weight: 700;
+        text-align: left;
+        text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.3);
+        text-transform: uppercase;
+        font-size: 1rem;
+    }
+
+    @media (min-width: 768px) {
+        .header__heading {
+            font-size: 2rem;
+        }
+    }
+
+    .header__heading--name {
+        color: #0f76ba;
+    }
+
+    .header__heading--company {
+        color: #f85741;
+    }
+
+    .header__heading--landline,
+    .header__heading--mobile {
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Navigation */
+    .navigation {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex: 1 1;
+        background-color: tomato;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.3);
+        font-family: "Nunito", sans-serif;
+        flex-grow: 0;
+    }
+
+    .navigation__list {
+        display: flex;
+        justify-content: flex-start;
+        list-style: none;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+    }
+
+    @media (min-width: 768px) {
+        .navigation__list {
+            flex-direction: row;
+        }
+    }
+
+    .navigation__list-item {
+        display: none;
+        padding: 15px;
+    }
+
+    @media (min-width: 768px) {
+        .navigation__list-item {
+            display: list-item;
+            flex-direction: row;
+        }
+
+        .navigation__list-item:hover {
+            background-color: #fff;
+        }
+
+        .navigation__list-item:hover .navigation__link {
+            color: #0f76ba;
+        }
+    }
+
+    .navigation__list--open .navigation__list-item {
+        display: list-item;
+    }
+
+    .navigation__list-item--hamburger {
+        display: list-item;
+        text-align: right;
+        padding: 15px;
+        cursor: pointer;
+    }
+
+    @media (min-width: 768px) {
+        .navigation__list-item--hamburger {
+            display: none;
+        }
+    }
+
+    .navigation__link {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .navigation__link:hover {
+        text-decoration: none;
+        color: #0f76ba;
+        cursor: pointer;
+    }
+
+    /* Hero image */
+    div.image {
+        width: 100%;
+        height: 150px;
+        overflow: hidden;
+        background-color: #0f76ba;
+        background-image: url('/trev-full.jpg');
+        background-position: 50% 30%;
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+
+    @media (min-width: 576px) {
+        div.image {
+            height: 350px;
+        }
+    }
+
+    /* Main content */
+    .main {
+        padding: 10px;
+        min-height: 45vh;
+        flex-grow: 1;
+    }
+
+    .main h1 {
+        color: #0f76ba;
+        font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.3);
+        line-height: 1.5;
+        font-size: 2rem;
+    }
+
+    .main p {
+        font-family: "Nunito", sans-serif;
+        margin-bottom: 1rem;
+    }
+
+    .main ul {
+        margin: 0 0 1rem 1.5rem;
+        font-family: "Nunito", sans-serif;
+    }
+
+    .main li {
+        margin-bottom: 0.5rem;
+    }
+
+    /* Blockquotes (testimonials) */
+    .blockquote {
+        background-color: #f5f5f5;
+        border-left: 5px solid #dbdbdb;
+        padding: 1.25em 1.5em;
+        margin: 0 0 1rem;
+    }
+
+    .citation {
+        display: block;
+        margin-top: 0.5rem;
+        font-style: normal;
+        font-weight: 600;
+        color: #555;
+    }
+
+    /* Footer */
+    .footer {
+        background-color: tomato;
+        padding: 10px 0;
+        color: #fff;
+        text-align: center;
+        font-family: "Nunito", sans-serif;
+    }
+</style>
