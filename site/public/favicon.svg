@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Steering wheel / road theme in site colours -->
+  <circle cx="16" cy="16" r="15" fill="#0f76ba"/>
+  <circle cx="16" cy="16" r="10" fill="none" stroke="#fff" stroke-width="2.5"/>
+  <circle cx="16" cy="16" r="3" fill="#f85741"/>
+  <line x1="16" y1="6" x2="16" y2="13" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+  <line x1="7.5" y1="20.5" x2="13.5" y2="17.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+  <line x1="24.5" y1="20.5" x2="18.5" y2="17.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+</svg>
